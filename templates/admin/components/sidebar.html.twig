@@ -3,9 +3,9 @@
 		<ul class="nav nav-pills flex-column mb-auto mb-0 py-3 px-2 align-items-stretch w-100" id="menu">
 			
 			<li class="nav-item flex-grow-1">
-				<a class="nav-link text-body align-middle d-flex justify-content-start px-4 py-3">
+				<a href="{{path('front_index')}}" target="blank" class="sidebar-menu nav-link text-body align-middle d-flex justify-content-start px-4 py-3">
 					<img src="{{ asset('assets/customer/logo.svg') }}" alt="{{CUSTOMER_NAME}}" width="24" />
-					<span class="ms-2 sidebar-menu-title" style="white-space: nowrap;">{{CUSTOMER_NAME}}</span>
+					<span class="ms-2 sidebar-menu-title">{{CUSTOMER_NAME}}</span>
 				</a>
 			</li>
 
@@ -41,39 +41,14 @@
 
 
 				{% if is_granted("ROLE_ADMIN") %}
-					{{ include("admin/components/sidebar-dropdown.html.twig", {
-						menu: menu is defined ? menu : null,
-						item: {
-							icon: "settings",
-							slug: "cms",
-							name: "Gestion du site",
-						},
-						items: [
-							{
-								slug: "cms_projects",
-								name: "Nos projets", 
-								href: path('admin_cms_projects_index') 
-							},{
-								slug: "cms_about",
-								name: "L'association", 
-								href: path('admin_cms_about_index') 
-							},{
-								slug: "cms_contact",
-								name: "Nous contacter", 
-								href: path('admin_cms_contact_index') 
-							}
-						]}) 
-					}}
-							
 					{{ include("admin/components/sidebar-item.html.twig", {
 						menu: menu is defined ? menu : null, 
 						icon: "groups", 
 						slug: "user",
-						name: "Membres", 
+						name: "Utilisateurs", 
 						href: path('admin_user_index')}) 
 					}}
 				{% endif %}
-
 				{% if is_granted("ROLE_ALLOWED_TO_SWITCH") or is_granted('IS_IMPERSONATOR') %}
 					{% if not is_granted('IS_IMPERSONATOR') %}
 						{{ include("admin/components/sidebar-item.html.twig", {
